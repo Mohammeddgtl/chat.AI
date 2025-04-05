@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Chat with Animated Background</title>
+
+  <style>
+    /* Background Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .snake {
+      position: absolute;
+      display: flex;
+      gap: 0.8vw;
+      pointer-events: none; /* Let clicks pass through */
+      z-index: 0; /* Behind chat UI */
+    }
+
+    .ball {
+      width: 6vw;
+      height: 6vw;
+      max-width: 20px;
+      max-height: 20px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 5px white;
+      animation: ballWave 2s ease-in-out infinite;
+    }
+
+    @keyframes ballWave {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20%) scale(1.4); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes move-horizontal {
+      0% { left: 0%; }
+      100% { left: 90%; }
+    }
+
+    @keyframes move-vertical {
+      0% { top: 0%; }
+      100% { top: 90%; }
+    }
+
+    @keyframes move-diagonal1 {
+      0% { left: 0%; top: 0%; }
+      100% { left: 90%; top: 90%; }
+    }
+
+    @keyframes move-diagonal2 {
+      0% { left: 90%; top: 0%; }
+      100% { left: 0%; top: 90%; }
+    }
+
+    .snake1 { top: 10%; animation: move-horizontal 8s linear infinite alternate; }
+    .snake2 { left: 10%; flex-direction: column; animation: move-vertical 6s linear infinite alternate; }
+    .snake3 { animation: move-diagonal1 10s linear infinite alternate; }
+    .snake4 { animation: move-diagonal2 12s linear infinite alternate; }
+    .snake5 { top: 50%; animation: move-horizontal 7s linear infinite alternate; }
+    .snake6 { left: 70%; flex-direction: column; animation: move-vertical 9s linear infinite alternate; }
+    .snake7 { animation: move-diagonal1 14s linear infinite alternate; }
+    .snake8 { animation: move-diagonal2 11s linear infinite alternate; }
+    .snake9 { top: 70%; animation: move-horizontal 10s linear infinite alternate; }
+    .snake10 { left: 50%; flex-direction: column; animation: move-vertical 8s linear infinite alternate; }
+
+    @media (max-width: 600px) {
+      .ball {
+        width: 3vw;
+        height: 3vw;
+        max-width: 10px;
+        max-height: 10px;
+      }
+
+      .snake {
+        gap: 1vw;
+      }
+    }
+
+    /* Chat UI Styles */
+    .chat-container {
+  
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1; /* Above snakes */
+    }
+
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      color: white;
+      font-size: 14px;
+      padding-right: 5px;
+    }
+
+    #chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
+    #chat-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 3px;
+    }
+
+    #input-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    #input-form button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #input-form button:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 600px) {
+      .chat-container {
+        height: 80%;
+        padding: 15px;
+      }
+
+      #user-input {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      #input-form button {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Snakes -->
+  <div class="snake snake1"><div class="ball"></div></div>
+  <div class="snake snake2"><div class="ball"></div></div>
+  <div class="snake snake3"><div class="ball"></div></div>
+  <div class="snake snake4"><div class="ball"></div></div>
+  <div class="snake snake5"><div class="ball"></div></div>
+  <div class="snake snake6"><div class="ball"></div></div>
+  <div class="snake snake7"><div class="ball"></div></div>
+  <div class="snake snake8"><div class="ball"></div></div>
+  <div class="snake snake9"><div class="ball"></div></div>
+  <div class="snake snake10"><div class="ball"></div></div>
+
+  <!-- Chat UI -->
+  <div class="chat-container">
+    <div id="chat-box">
+      <!-- Messages will appear here -->
+    </div>
+
+    <form id="input-form">
+      <input type="text" id="user-input" placeholder="Type your message..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>

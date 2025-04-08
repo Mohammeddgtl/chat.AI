@@ -8,7 +8,7 @@ document.getElementById("input-form").addEventListener("submit", async function(
     appendMessage("You", userInput);
 
     try {
-        const response = await fetch("https://63c8-2409-4040-d45-7956-3cf8-371f-3e9b-7ebd.ngrok-free.app/v1/chat/completions", {
+        const response = await fetch("https://54b1-2409-4040-e8e-a600-d9db-d86-d51-f4a1.ngrok-free.app/v1/chat/completions", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
